@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import CardList from "../components/CardList";
+import AddButton from "../components/AddButton";
 import SearchBox from "../components/SearchBox";
 
 class App extends Component {
@@ -31,8 +32,11 @@ class App extends Component {
     } else {
       return (
         <div className="tc">
-          <h1 className="f1 code">RoboFriends</h1>
-          <SearchBox onSearch={this.onSearch} />
+          <div className="flex items-center justify-around">
+            <h1 className="f1 ml5 dark-blue">RoboFriends</h1>
+            <AddButton />
+            <SearchBox classname="mr5" onSearch={this.onSearch} />
+          </div>
           <CardList robots={filteredRobots} />
         </div>
       );
