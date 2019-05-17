@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import CardList from "../components/CardList";
-import AddButton from "./AddButton";
+import AddButton from "../components/AddButton";
 import SearchBox from "../components/SearchBox";
+import NewRobotForm from "../components/NewRobotForm";
 
 class App extends Component {
   constructor() {
@@ -9,7 +10,7 @@ class App extends Component {
     this.state = {
       robots: [],
       searchfield: "",
-      addForm: false
+      addingRobot: false
     };
   }
 
@@ -17,8 +18,8 @@ class App extends Component {
     this.setState({ searchfield: event.target.value });
   };
 
-  handleClick = () => {
-    console.log("click");
+  showaddingRobot = () => {
+    this.setState({ addingRobot: !this.state.addingRobot });
   };
 
   componentDidMount() {
@@ -34,12 +35,12 @@ class App extends Component {
     );
     return (
       <div className="tc">
-        <div className="flex items-center justify-around">
-          <h1 className="f1 ml5 dark-blue">RoboFriends</h1>
-          <AddButton onClick={this.handleClick} />
-          <SearchBox classname="mr5" onSearch={this.onSearch} />
-          {/* {this.state.addForm ? <h1>Working</h1> : <div />} */}
+        <div className="flex items-center justify-end pl4 pr4">
+          <h1 className="f1 dark-blue mr-auto">RoboFriends</h1>
+          <AddButton callback={this.showaddingRobot} />
+          <SearchBox onSearch={this.onSearch} />
         </div>
+        {this.state.addingRobot && <NewRobotForm />}
         <CardList robots={filteredRobots} />
       </div>
     );
